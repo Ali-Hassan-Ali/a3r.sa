@@ -1,0 +1,983 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>أثر - مرجعيتك لتطوير القطاع غير الربحي | Material Design</title>
+<meta name="description" content="منصة أثر مرجعيتك المتكاملة للوائح والنماذج والتقييمات التي تمكّن الجمعيات الأهلية من ترسيخ الامتثال والشفافية والمساءلة في عملها المؤسسي.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   Material Design 3 theme for أثر
+   Tonal palette derived from the brand teal (#167170) using M3's
+   role system: primary / on-primary / primary-container, etc.
+   ============================================================ */
+:root {
+    /* Primary — exact أثر brand teal, expanded into M3 tonal roles */
+    --md-primary: #167170;
+    --md-on-primary: #ffffff;
+    --md-primary-container: #a3f2e6;
+    --md-on-primary-container: #00201c;
+
+    /* Secondary — muted teal-gray for supporting accents (same hue family) */
+    --md-secondary: #4a6360;
+    --md-on-secondary: #ffffff;
+    --md-secondary-container: #cce8e3;
+    --md-on-secondary-container: #051f1c;
+
+    /* Tertiary — deeper teal tone for highlights / stat callouts (no foreign hue) */
+    --md-tertiary: #0e5b57;
+    --md-on-tertiary: #ffffff;
+    --md-tertiary-container: #cdeeea;
+    --md-on-tertiary-container: #002020;
+
+    /* Error */
+    --md-error: #ba1a1a;
+    --md-on-error: #ffffff;
+    --md-error-container: #ffdad6;
+    --md-on-error-container: #410002;
+
+    /* Neutral surfaces */
+    --md-surface: #f5faf8;
+    --md-surface-dim: #d6dbd9;
+    --md-surface-bright: #f5faf8;
+    --md-surface-container-lowest: #ffffff;
+    --md-surface-container-low: #eff5f2;
+    --md-surface-container: #e9f0ed;
+    --md-surface-container-high: #e3eae7;
+    --md-surface-container-highest: #dee4e1;
+    --md-on-surface: #171d1c;
+    --md-on-surface-variant: #3f4947;
+    --md-outline: #6f7977;
+    --md-outline-variant: #bfc9c6;
+    --md-inverse-surface: #2b3231;
+    --md-inverse-on-surface: #ecf2ef;
+    --md-inverse-primary: #86d5c9;
+
+    --md-font: 'Cairo', 'Roboto', 'Segoe UI', Tahoma, sans-serif;
+    --md-font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+
+    /* M3 elevation shadows (approximate, tinted with primary) */
+    --md-el1: 0 1px 2px 0 rgba(0,0,0,.10), 0 1px 3px 1px rgba(0,0,0,.08);
+    --md-el2: 0 1px 2px 0 rgba(0,0,0,.10), 0 2px 6px 2px rgba(0,0,0,.10);
+    --md-el3: 0 1px 3px 0 rgba(0,0,0,.12), 0 4px 8px 3px rgba(0,0,0,.10);
+
+    /* M3 shape scale */
+    --shape-xs: 4px;
+    --shape-sm: 8px;
+    --shape-md: 12px;
+    --shape-lg: 16px;
+    --shape-xl: 28px;
+    --shape-full: 999px;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+    margin: 0;
+    background: var(--md-surface);
+    color: var(--md-on-surface);
+    font-family: var(--md-font);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+
+.mono { font-family: var(--md-font-mono); font-variant-numeric: tabular-nums; }
+
+/* ---------- State layer helper (M3 hover/press) ---------- */
+.state-layer { position: relative; overflow: hidden; }
+.state-layer::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: currentColor;
+    opacity: 0;
+    transition: opacity .15s ease;
+    pointer-events: none;
+}
+.state-layer:hover::after { opacity: .08; }
+.state-layer:active::after { opacity: .12; }
+
+/* ---------- Top App Bar ---------- */
+.top-app-bar {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    background: var(--md-surface-container-lowest);
+    border-bottom: 1px solid var(--md-outline-variant);
+}
+.top-app-bar-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 16px;
+    font-size: 12px;
+    color: var(--md-on-surface-variant);
+    border-bottom: 1px solid var(--md-outline-variant);
+}
+.top-app-bar-row .row-item {
+    display: flex; align-items: center; gap: 6px;
+    padding: 6px 6px;
+    color: var(--md-on-surface-variant);
+    border-radius: var(--shape-xs);
+}
+.top-app-bar-row .row-item:hover { color: var(--md-primary); }
+.top-app-bar-inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 24px;
+    gap: 24px;
+}
+.brand { display: flex; align-items: center; gap: 12px; }
+.brand-mark {
+    width: 40px; height: 42px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+.brand-text { display: flex; flex-direction: column; line-height: 1.25; }
+.brand-name { font-weight: 800; font-size: 17px; color: var(--md-on-surface); }
+.brand-tag { font-size: 11px; color: var(--md-on-surface-variant); }
+
+.nav { display: flex; align-items: center; gap: 2px; }
+.nav-link {
+    display: flex; align-items: center;
+    padding: 10px 16px;
+    border-radius: var(--shape-full);
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--md-on-surface-variant);
+    white-space: nowrap;
+    color: var(--md-on-surface-variant);
+}
+.nav-link.current {
+    background: var(--md-secondary-container);
+    color: var(--md-on-secondary-container);
+}
+.nav-link:not(.current):hover { background: var(--md-surface-container-high); color: var(--md-on-surface); }
+
+.header-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+.nav-toggle {
+    display: none;
+    align-items: center; justify-content: center;
+    width: 44px; height: 44px;
+    border-radius: var(--shape-full);
+    border: 0;
+    background: transparent;
+    color: var(--md-on-surface);
+    cursor: pointer;
+}
+
+/* ---------- M3 Buttons ---------- */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    height: 40px;
+    padding: 0 24px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: var(--shape-full);
+    border: 1px solid var(--md-outline);
+    background: transparent;
+    color: var(--md-primary);
+    cursor: pointer;
+    white-space: nowrap;
+}
+.btn.state-layer { color: var(--md-primary); }
+.btn-filled {
+    background: var(--md-primary);
+    color: var(--md-on-primary);
+    border-color: var(--md-primary);
+    box-shadow: var(--md-el1);
+}
+.btn-filled.state-layer { color: var(--md-on-primary); }
+.btn-tonal {
+    background: var(--md-secondary-container);
+    color: var(--md-on-secondary-container);
+    border-color: transparent;
+}
+.btn-tonal.state-layer { color: var(--md-on-secondary-container); }
+.btn-text {
+    border-color: transparent;
+    padding: 0 12px;
+}
+.btn-sm { height: 34px; padding: 0 16px; font-size: 12.5px; }
+
+/* ---------- Chips ---------- */
+.chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 32px;
+    padding: 0 14px;
+    border-radius: var(--shape-sm);
+    border: 1px solid var(--md-outline-variant);
+    background: var(--md-surface-container-low);
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--md-on-surface-variant);
+}
+.chip-assist {
+    background: var(--md-primary-container);
+    color: var(--md-on-primary-container);
+    border-color: transparent;
+}
+
+/* ---------- Cards (M3 elevated / filled / outlined) ---------- */
+.card {
+    background: var(--md-surface-container-lowest);
+    border-radius: var(--shape-lg);
+    box-shadow: var(--md-el1);
+}
+.card-filled {
+    background: var(--md-surface-container-high);
+    box-shadow: none;
+}
+.card-outlined {
+    background: var(--md-surface-container-lowest);
+    border: 1px solid var(--md-outline-variant);
+    box-shadow: none;
+}
+
+/* ---------- Layout ---------- */
+.container { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+section { padding: 64px 24px; }
+section.tight { padding: 40px 24px; }
+.section-inner { max-width: 1180px; margin: 0 auto; }
+.section-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 32px;
+}
+.overline {
+    font-size: 11.5px;
+    font-weight: 700;
+    color: var(--md-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin: 0 0 8px;
+}
+.section-title {
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    color: var(--md-on-surface);
+    margin: 0;
+}
+
+/* ---------- Hero ---------- */
+.hero {
+    background: linear-gradient(180deg, var(--md-surface-container-low), var(--md-surface));
+}
+.hero-inner {
+    padding: 72px 24px 56px;
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 48px;
+    align-items: center;
+    max-width: 1180px;
+    margin: 0 auto;
+}
+.hero h1 {
+    font-size: 40px;
+    font-weight: 800;
+    line-height: 1.24;
+    letter-spacing: -0.015em;
+    color: var(--md-on-surface);
+    margin: 18px 0 16px;
+}
+.hero p.lead {
+    font-size: 16px;
+    color: var(--md-on-surface-variant);
+    max-width: 52ch;
+    margin: 0 0 28px;
+}
+.hero-cta { display: flex; gap: 12px; flex-wrap: wrap; }
+.hero-stats { display: flex; gap: 32px; margin-top: 36px; }
+.hero-stat-num {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--md-primary);
+    font-family: var(--md-font-mono);
+}
+.hero-stat-label { font-size: 12px; color: var(--md-on-surface-variant); margin-top: 2px; }
+
+.hero-visual { padding: 4px; }
+.hero-visual-head {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 20px;
+}
+.hero-visual-title { font-size: 13px; font-weight: 700; color: var(--md-on-surface); }
+.badge {
+    display: inline-flex; align-items: center; gap: 4px;
+    padding: 4px 12px;
+    border-radius: var(--shape-full);
+    font-size: 11px; font-weight: 700;
+    background: var(--md-tertiary-container);
+    color: var(--md-on-tertiary-container);
+}
+.hero-visual-body { padding: 4px 20px 20px; }
+.gauge-row {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--md-outline-variant);
+}
+.gauge-row:last-child { border-bottom: none; }
+.gauge-label { font-size: 13px; color: var(--md-on-surface); }
+.gauge-track {
+    width: 110px; height: 8px;
+    border-radius: var(--shape-full);
+    background: var(--md-surface-container-high);
+    overflow: hidden;
+}
+.gauge-fill { height: 100%; border-radius: var(--shape-full); background: var(--md-primary); }
+.gauge-val { font-size: 12px; color: var(--md-on-surface-variant); min-width: 32px; text-align: left; }
+
+/* ---------- Pillars ---------- */
+.pillars {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+}
+.pillar-card { padding: 24px 20px; }
+.pillar-icon {
+    width: 48px; height: 48px;
+    border-radius: var(--shape-md);
+    background: var(--md-primary-container);
+    color: var(--md-on-primary-container);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 16px;
+}
+.pillar-icon svg { width: 24px; height: 24px; }
+.pillar-title { font-size: 15.5px; font-weight: 700; color: var(--md-on-surface); margin-bottom: 6px; }
+.pillar-desc { font-size: 13px; color: var(--md-on-surface-variant); line-height: 1.6; }
+
+/* ---------- Banner ---------- */
+.banner {
+    background: var(--md-primary);
+    border-radius: var(--shape-xl);
+    padding: 40px 44px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 28px;
+    color: var(--md-on-primary);
+    box-shadow: var(--md-el2);
+}
+.banner h3 { color: var(--md-on-primary); font-size: 21px; font-weight: 800; margin: 0 0 8px; }
+.banner p { color: color-mix(in srgb, var(--md-on-primary) 82%, transparent); font-size: 13.5px; max-width: 52ch; margin: 0; }
+.disclaimer-note {
+    display: flex; align-items: flex-start; gap: 8px;
+    margin-top: 16px;
+    font-size: 11.5px;
+    color: color-mix(in srgb, var(--md-on-primary) 75%, transparent);
+    line-height: 1.6;
+}
+.disclaimer-note svg { flex-shrink: 0; margin-top: 2px; }
+.banner :is(.btn) {
+    background: var(--md-on-primary);
+    color: var(--md-primary);
+    border-color: var(--md-on-primary);
+    flex-shrink: 0;
+}
+
+/* ---------- Founder ---------- */
+.founder { display: grid; grid-template-columns: auto 1fr; gap: 32px; align-items: start; padding: 32px; }
+.founder-photo {
+    width: 120px; height: 120px;
+    border-radius: var(--shape-xl);
+    background: var(--md-primary-container);
+    color: var(--md-on-primary-container);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 34px; font-weight: 800;
+    flex-shrink: 0;
+}
+.founder-name { font-size: 19px; font-weight: 800; color: var(--md-on-surface); }
+.founder-creds {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-family: var(--md-font-mono);
+    font-size: 11px;
+    color: var(--md-on-primary-container);
+    background: var(--md-primary-container);
+    padding: 3px 10px;
+    border-radius: var(--shape-xs);
+    margin-inline-start: 10px;
+    vertical-align: middle;
+}
+.founder-role { font-size: 13.5px; color: var(--md-on-surface-variant); margin: 6px 0 14px; }
+.founder-bio { font-size: 14px; color: var(--md-on-surface); margin: 0 0 18px; max-width: 64ch; line-height: 1.7; }
+
+/* ---------- Articles ---------- */
+.article-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.article-card { overflow: hidden; display: flex; flex-direction: column; }
+.article-thumb { aspect-ratio: 16/9; background: var(--md-surface-container-high); }
+.article-body { padding: 18px; display: flex; flex-direction: column; gap: 8px; }
+.article-title { font-size: 14.5px; font-weight: 700; color: var(--md-on-surface); line-height: 1.5; }
+.article-meta {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 11px; color: var(--md-on-surface-variant);
+    padding-top: 10px; margin-top: 4px;
+    border-top: 1px solid var(--md-outline-variant);
+}
+.avatar {
+    width: 22px; height: 22px; border-radius: 50%;
+    background: var(--md-secondary-container);
+    color: var(--md-on-secondary-container);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: 700; flex-shrink: 0;
+}
+
+/* ---------- Newsletter ---------- */
+.newsletter {
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: 32px;
+    align-items: center;
+    padding: 36px;
+}
+.newsletter-form { display: flex; gap: 10px; flex-wrap: wrap; }
+.md-field {
+    flex: 1;
+    min-width: 200px;
+    height: 48px;
+    padding: 0 16px;
+    border-radius: var(--shape-xs);
+    border: none;
+    border-bottom: 2px solid var(--md-outline);
+    background: var(--md-surface-container-highest);
+    color: var(--md-on-surface);
+    font-size: 13.5px;
+    font-family: inherit;
+}
+.md-field::placeholder { color: var(--md-on-surface-variant); }
+.md-field:focus { outline: none; border-bottom-color: var(--md-primary); }
+
+/* ---------- Testimonials ---------- */
+.testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.testi-card { padding: 22px; display: flex; flex-direction: column; gap: 18px; }
+.testi-quote { font-size: 13.5px; color: var(--md-on-surface); margin: 0; line-height: 1.7; }
+.testi-person { display: flex; align-items: center; gap: 12px; }
+.testi-name { font-size: 13px; font-weight: 700; color: var(--md-on-surface); }
+.testi-role { font-size: 11px; color: var(--md-on-surface-variant); }
+
+/* ---------- Footer ---------- */
+.footer {
+    background: var(--md-inverse-surface);
+    color: var(--md-inverse-on-surface);
+    padding: 48px 24px 24px;
+}
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
+    gap: 32px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+    max-width: 1180px;
+    margin: 0 auto;
+}
+.footer-title { color: #fff; font-size: 12.5px; font-weight: 700; margin-bottom: 14px; }
+.footer-desc { font-size: 12.5px; line-height: 1.8; color: color-mix(in srgb, var(--md-inverse-on-surface) 75%, transparent); max-width: 32ch; }
+.footer-link { display: block; font-size: 12.5px; color: color-mix(in srgb, var(--md-inverse-on-surface) 75%, transparent); padding: 5px 0; }
+.footer-link:hover { color: #fff; }
+.footer-social { display: flex; gap: 8px; margin-top: 14px; }
+.social-btn {
+    width: 36px; height: 36px; border-radius: var(--shape-full);
+    background: rgba(255,255,255,0.10);
+    display: flex; align-items: center; justify-content: center;
+    color: color-mix(in srgb, var(--md-inverse-on-surface) 85%, transparent);
+}
+.social-btn:hover { background: rgba(255,255,255,0.18); color: #fff; }
+.footer-bottom {
+    display: flex; align-items: center; justify-content: space-between;
+    padding-top: 18px; font-size: 11.5px;
+    max-width: 1180px; margin: 0 auto;
+    color: color-mix(in srgb, var(--md-inverse-on-surface) 65%, transparent);
+}
+
+/* ---------- Mobile nav ---------- */
+.mobile-nav-backdrop { display: none; }
+.mobile-nav { display: none; }
+
+@media (max-width: 960px) {
+    .hero-inner { grid-template-columns: 1fr; }
+    .pillars { grid-template-columns: repeat(2, 1fr); }
+    .article-grid { grid-template-columns: repeat(2, 1fr); }
+    .testi-grid { grid-template-columns: repeat(2, 1fr); }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+
+    .nav { display: none; }
+    .nav-toggle { display: flex; }
+    .top-app-bar-row { display: none; }
+
+    .mobile-nav-backdrop {
+        display: block; position: fixed; inset: 0;
+        background: rgba(0,0,0,0.4);
+        z-index: 45; opacity: 0; pointer-events: none;
+        transition: opacity .2s ease;
+    }
+    .mobile-nav-backdrop.open { opacity: 1; pointer-events: auto; }
+    .mobile-nav {
+        display: flex; flex-direction: column;
+        position: fixed; inset-inline-end: 0; top: 0; bottom: 0;
+        width: min(300px, 85vw);
+        background: var(--md-surface-container-lowest);
+        box-shadow: var(--md-el3);
+        z-index: 50;
+        transform: translateX(-100%);
+        transition: transform .25s ease;
+        overflow-y: auto;
+    }
+    [dir="rtl"] .mobile-nav { transform: translateX(100%); }
+    .mobile-nav.open { transform: translateX(0); }
+    .mobile-nav-head {
+        display: flex; align-items: center; justify-content: space-between; gap: 12px;
+        padding: 16px; border-bottom: 1px solid var(--md-outline-variant); flex-shrink: 0;
+    }
+    .mobile-nav-links { display: flex; flex-direction: column; gap: 2px; padding: 10px 12px 20px; }
+    .mobile-nav-link {
+        padding: 14px 14px; border-radius: var(--shape-sm);
+        font-size: 14.5px; font-weight: 600; color: var(--md-on-surface-variant);
+    }
+    .mobile-nav-link.current { background: var(--md-secondary-container); color: var(--md-on-secondary-container); }
+}
+
+@media (max-width: 720px) {
+    .hero-inner { padding: 36px 20px 40px; }
+    .hero h1 { font-size: 28px; }
+    .hero-stats { flex-wrap: wrap; gap: 22px; }
+    .pillars { grid-template-columns: 1fr; }
+    .banner { flex-direction: column; align-items: flex-start; padding: 28px 24px; border-radius: var(--shape-lg); }
+    .founder { grid-template-columns: 1fr; padding: 24px; }
+    .article-grid { grid-template-columns: 1fr; }
+    .newsletter { grid-template-columns: 1fr; padding: 24px; }
+    .testi-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+    .footer-bottom { flex-direction: column; align-items: flex-start; gap: 8px; }
+    section { padding: 40px 20px; }
+    section.tight { padding: 28px 20px; }
+    .top-app-bar-inner { padding: 10px 16px; }
+    .brand-tag { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- Top App Bar -->
+<header class="top-app-bar">
+    <div class="top-app-bar-row">
+        <div class="container" style="display:flex; align-items:center; justify-content:space-between; padding:0;">
+            <div style="display:flex; align-items:center; gap:18px;">
+                <a href="tel:+966500000000" class="row-item state-layer">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                    <span>+966 50 000 0000</span>
+                </a>
+                <a href="mailto:info@a3r.sa" class="row-item state-layer">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m22 6-10 7L2 6"></path></svg>
+                    <span>info@a3r.sa</span>
+                </a>
+            </div>
+            <div style="display:flex; align-items:center; gap:10px;">
+                <a href="#" class="row-item state-layer">مركز المساعدة</a>
+                <a href="#" class="row-item state-layer">حسابي</a>
+            </div>
+        </div>
+    </div>
+    <div class="top-app-bar-inner">
+        <a href="#" class="brand">
+            <img src="../../images/athar-logo.png" alt="أثر" class="brand-mark">
+            <div class="brand-text">
+                <span class="brand-name">أثر</span>
+                <span class="brand-tag">مرجعيتك لتطوير القطاع غير الربحي</span>
+            </div>
+        </a>
+        <nav class="nav">
+            <a href="#" class="nav-link current state-layer">الرئيسية</a>
+            <a href="#" class="nav-link state-layer">المؤسس</a>
+            <a href="#" class="nav-link state-layer">قيّم جمعيتك</a>
+            <a href="#" class="nav-link state-layer">مكتبة النماذج</a>
+            <a href="#" class="nav-link state-layer">المحتوى والمعرفة</a>
+            <a href="#" class="nav-link state-layer">دليل الجمعيات</a>
+        </nav>
+        <div class="header-actions">
+            <button type="button" class="nav-toggle state-layer" id="navToggle" aria-label="فتح القائمة" aria-expanded="false">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            </button>
+            <a href="#" class="btn btn-tonal btn-sm state-layer">تسجيل الدخول</a>
+        </div>
+    </div>
+</header>
+
+<div class="mobile-nav-backdrop" id="navBackdrop"></div>
+<div class="mobile-nav" id="mobileNav">
+    <div class="mobile-nav-head">
+        <div class="brand">
+            <img src="../../images/athar-logo.png" alt="أثر" class="brand-mark" style="width:32px; height:34px;">
+            <span class="brand-name">أثر</span>
+        </div>
+        <button type="button" class="nav-toggle state-layer" id="navClose" aria-label="إغلاق القائمة" style="display:flex;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"></path></svg>
+        </button>
+    </div>
+    <div class="mobile-nav-links">
+        <a href="#" class="mobile-nav-link current state-layer">الرئيسية</a>
+        <a href="#" class="mobile-nav-link state-layer">المؤسس</a>
+        <a href="#" class="mobile-nav-link state-layer">قيّم جمعيتك</a>
+        <a href="#" class="mobile-nav-link state-layer">مكتبة النماذج</a>
+        <a href="#" class="mobile-nav-link state-layer">المحتوى والمعرفة</a>
+        <a href="#" class="mobile-nav-link state-layer">دليل الجمعيات</a>
+    </div>
+</div>
+
+<!-- Hero -->
+<div class="hero">
+    <div class="hero-inner">
+        <div>
+            <span class="chip chip-assist">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+                مبادرة وطنية لتطوير حوكمة القطاع غير الربحي
+            </span>
+            <h1>الكفاءة والتميز في إثراء وتطوير القطاع غير الربحي</h1>
+            <p class="lead">
+                منصة أثر مرجعيتك المتكاملة للوائح والنماذج والتقييمات
+                التي تمكّن الجمعيات الأهلية من ترسيخ الامتثال
+                والشفافية والمساءلة في عملها المؤسسي.
+            </p>
+            <div class="hero-cta">
+                <a href="#" class="btn btn-filled state-layer">
+                    ابدأ تقييم جمعيتك
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+                </a>
+                <a href="#" class="btn state-layer">تصفح مكتبة النماذج</a>
+            </div>
+            <div class="hero-stats">
+                <div>
+                    <div class="hero-stat-num">240+</div>
+                    <div class="hero-stat-label">نموذج ولائحة</div>
+                </div>
+                <div>
+                    <div class="hero-stat-num">1,860</div>
+                    <div class="hero-stat-label">جمعية مسجّلة</div>
+                </div>
+                <div>
+                    <div class="hero-stat-num">100</div>
+                    <div class="hero-stat-label">درجة تقييم الحوكمة</div>
+                </div>
+            </div>
+        </div>
+        <div class="card hero-visual">
+            <div class="hero-visual-head">
+                <span class="hero-visual-title">ملخص تصنيف الحوكمة</span>
+                <span class="badge">تصنيف A</span>
+            </div>
+            <div class="hero-visual-body">
+                <div class="gauge-row">
+                    <span class="gauge-label">الامتثال والالتزام</span>
+                    <div style="display:flex; align-items:center; gap:10px;">
+                        <div class="gauge-track"><div class="gauge-fill" style="width:88%"></div></div>
+                        <span class="mono gauge-val">88%</span>
+                    </div>
+                </div>
+                <div class="gauge-row">
+                    <span class="gauge-label">السلامة المالية</span>
+                    <div style="display:flex; align-items:center; gap:10px;">
+                        <div class="gauge-track"><div class="gauge-fill" style="width:76%"></div></div>
+                        <span class="mono gauge-val">76%</span>
+                    </div>
+                </div>
+                <div class="gauge-row">
+                    <span class="gauge-label">الشفافية والإفصاح</span>
+                    <div style="display:flex; align-items:center; gap:10px;">
+                        <div class="gauge-track"><div class="gauge-fill" style="width:92%"></div></div>
+                        <span class="mono gauge-val">92%</span>
+                    </div>
+                </div>
+                <div class="gauge-row">
+                    <span class="gauge-label">مكافحة غسل الأموال</span>
+                    <div style="display:flex; align-items:center; gap:10px;">
+                        <div class="gauge-track"><div class="gauge-fill" style="width:81%"></div></div>
+                        <span class="mono gauge-val">81%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Pillars -->
+<section>
+    <div class="section-inner">
+        <div class="section-head">
+            <div>
+                <p class="overline">القيم المؤسسية</p>
+                <h2 class="section-title">ركائز الحوكمة الأربع</h2>
+            </div>
+        </div>
+        <div class="pillars">
+            <div class="card card-filled pillar-card">
+                <div class="pillar-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5M2 12l10 5 10-5"></path></svg></div>
+                <div class="pillar-title">الشفافية</div>
+                <div class="pillar-desc">إفصاح واضح وموثّق عن الأداء المالي والإداري لكل جمعية أمام الجهات الرقابية والمستفيدين.</div>
+            </div>
+            <div class="card card-filled pillar-card">
+                <div class="pillar-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg></div>
+                <div class="pillar-title">الامتثال</div>
+                <div class="pillar-desc">لوائح ونماذج محدّثة تواكب متطلبات الجهات الرقابية وتقلّل مخاطر المخالفات التنظيمية.</div>
+            </div>
+            <div class="card card-filled pillar-card">
+                <div class="pillar-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></div>
+                <div class="pillar-title">المساءلة</div>
+                <div class="pillar-desc">آليات متابعة تُحمّل مجالس الإدارة والإدارات التنفيذية مسؤولية القرارات ونتائجها.</div>
+            </div>
+            <div class="card card-filled pillar-card">
+                <div class="pillar-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M2 12h20"></path><circle cx="12" cy="12" r="9"></circle></svg></div>
+                <div class="pillar-title">الاستدامة</div>
+                <div class="pillar-desc">تخطيط مؤسسي طويل الأمد يضمن استمرارية الأثر المجتمعي بعيدًا عن الاعتماد على الأفراد.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Assessment banner -->
+<section class="tight">
+    <div class="section-inner">
+        <div class="banner">
+            <div>
+                <h3>قيّم جمعيتك الآن</h3>
+                <p>
+                    أداة تقييم ذاتي تقيس امتثال جمعيتك عبر عشرة أقسام
+                    رئيسية بمجموع مئة درجة، وتمنحك تقريرًا استرشاديًا
+                    فوريًا بالنتيجة.
+                </p>
+                <div class="disclaimer-note">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4M12 8h.01"></path></svg>
+                    <span>جميع نتائج التقييم لأغراض استرشادية فقط، ولا تُعد تقييمًا رسميًا معتمدًا من الجهات الرقابية.</span>
+                </div>
+            </div>
+            <a href="#" class="btn state-layer">
+                ابدأ التقييم
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Founder -->
+<section>
+    <div class="section-inner">
+        <div class="section-head">
+            <div>
+                <p class="overline">كلمة المؤسس</p>
+                <h2 class="section-title">من وراء المنصة</h2>
+            </div>
+            <a href="#" class="btn btn-sm state-layer">الملف الكامل</a>
+        </div>
+        <div class="card founder">
+            <div class="founder-photo">ع.ز</div>
+            <div>
+                <div>
+                    <span class="founder-name">أ. عبدالله الزُبيدي</span>
+                    <span class="founder-creds">مستشار حوكمة معتمد</span>
+                </div>
+                <div class="founder-role">مؤسس منصة أثر ومكتب أثر برو للاستشارات</div>
+                <p class="founder-bio">
+                    مستشار في الحوكمة والتخطيط الاستراتيجي للمنظمات غير
+                    الربحية، عمل على تطوير عشرات اللوائح والنماذج التي
+                    تعتمدها الجمعيات الأهلية اليوم لترسيخ الامتثال
+                    والشفافية في عملها المؤسسي.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Articles -->
+<section>
+    <div class="section-inner">
+        <div class="section-head">
+            <div>
+                <p class="overline">المحتوى والمعرفة</p>
+                <h2 class="section-title">أحدث البحوث والمقالات</h2>
+            </div>
+            <a href="#" class="btn btn-sm state-layer">عرض جميع المقالات</a>
+        </div>
+        <div class="article-grid">
+            <a href="#" class="card article-card state-layer">
+                <div class="article-thumb"></div>
+                <div class="article-body">
+                    <div class="article-title">دليل إعداد اللائحة المالية لجمعية أهلية ناشئة</div>
+                    <div class="article-meta">
+                        <div class="avatar">ع.ز</div>
+                        <span>عبدالله الزُبيدي</span>
+                    </div>
+                </div>
+            </a>
+            <a href="#" class="card article-card state-layer">
+                <div class="article-thumb"></div>
+                <div class="article-body">
+                    <div class="article-title">عشر خطوات لتحسين تصنيف الحوكمة قبل التدقيق السنوي</div>
+                    <div class="article-meta">
+                        <div class="avatar">ع.ز</div>
+                        <span>عبدالله الزُبيدي</span>
+                    </div>
+                </div>
+            </a>
+            <a href="#" class="card article-card state-layer">
+                <div class="article-thumb"></div>
+                <div class="article-body">
+                    <div class="article-title">الفرق بين المساءلة الإدارية والمساءلة المالية في العمل غير الربحي</div>
+                    <div class="article-meta">
+                        <div class="avatar">ع.ز</div>
+                        <span>عبدالله الزُبيدي</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Newsletter -->
+<section class="tight">
+    <div class="section-inner">
+        <div class="card card-filled newsletter">
+            <div>
+                <p class="overline">نشرة أثر</p>
+                <h3 style="font-size:18px; font-weight:800; margin:0 0 8px; color:var(--md-on-surface);">تابع مستجدات القطاع أسبوعيًا</h3>
+                <p style="font-size:13px; color:var(--md-on-surface-variant); margin:0;">
+                    اشترك في نشرة أثر عبر واتساب لتصلك أحدث اللوائح
+                    والنماذج والتحديثات التنظيمية.
+                </p>
+            </div>
+            <div class="newsletter-form">
+                <input type="tel" class="md-field" placeholder="رقم الجوال (واتساب)">
+                <a href="#" class="btn btn-filled state-layer">اشتراك</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials -->
+<section>
+    <div class="section-inner">
+        <div class="section-head">
+            <div>
+                <p class="overline">قالوا عن أثر</p>
+                <h2 class="section-title">آراء قادة القطاع</h2>
+            </div>
+        </div>
+        <div class="testi-grid">
+            <div class="card testi-card">
+                <p class="testi-quote">"منصة أثر اختصرت علينا شهورًا من البحث عن نماذج ولوائح متوافقة مع متطلبات الجهات الرقابية."</p>
+                <div class="testi-person">
+                    <div class="avatar">س.ح</div>
+                    <div>
+                        <div class="testi-name">سارة الحربي</div>
+                        <div class="testi-role">مدير تنفيذي، جمعية أهلية</div>
+                    </div>
+                </div>
+            </div>
+            <div class="card testi-card">
+                <p class="testi-quote">"أداة التقييم الذاتي كشفت لنا فجوات في الحوكمة ما كنا منتبهين لها، ووجّهتنا للحل مباشرة."</p>
+                <div class="testi-person">
+                    <div class="avatar">م.ق</div>
+                    <div>
+                        <div class="testi-name">محمد القحطاني</div>
+                        <div class="testi-role">رئيس مجلس إدارة</div>
+                    </div>
+                </div>
+            </div>
+            <div class="card testi-card">
+                <p class="testi-quote">"مرجع يومي لفريقنا الإداري، خصوصًا مكتبة النماذج الجاهزة للاستخدام المباشر."</p>
+                <div class="testi-person">
+                    <div class="avatar">ن.ع</div>
+                    <div>
+                        <div class="testi-name">نورة العتيبي</div>
+                        <div class="testi-role">مسؤول امتثال</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="footer-grid">
+        <div>
+            <div class="brand" style="margin-bottom:14px;">
+                <img src="../../images/athar-logo.png" alt="أثر" class="brand-mark" style="width:32px; height:34px;">
+                <span class="brand-name" style="color:#fff;">أثر</span>
+            </div>
+            <p class="footer-desc">
+                منصة أثر مرجعيتك المتكاملة للوائح والنماذج والتقييمات
+                التي تمكّن الجمعيات الأهلية من ترسيخ الامتثال والشفافية
+                والمساءلة في عملها المؤسسي.
+            </p>
+        </div>
+        <div>
+            <div class="footer-title">روابط سريعة</div>
+            <a href="#" class="footer-link">المؤسس</a>
+            <a href="#" class="footer-link">قيّم جمعيتك</a>
+            <a href="#" class="footer-link">مكتبة النماذج</a>
+            <a href="#" class="footer-link">دليل الجمعيات</a>
+        </div>
+        <div>
+            <div class="footer-title">المحتوى</div>
+            <a href="#" class="footer-link">المحتوى والمعرفة</a>
+            <a href="#" class="footer-link">مقاطع الفيديو</a>
+        </div>
+        <div>
+            <div class="footer-title">تواصل معنا</div>
+            <a href="mailto:info@a3r.sa" class="footer-link">info@a3r.sa</a>
+            <a href="tel:+966500000000" class="footer-link">+966 50 000 0000</a>
+            <div class="footer-social">
+                <a href="#" class="social-btn state-layer" title="تويتر">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>
+                </a>
+                <a href="#" class="social-btn state-layer" title="لينكدإن">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <span>جميع الحقوق محفوظة © 2026 أثر</span>
+        <span>سياسة الخصوصية · الشروط والأحكام</span>
+    </div>
+</footer>
+
+<script>
+(function () {
+    var toggle = document.getElementById('navToggle');
+    var close = document.getElementById('navClose');
+    var backdrop = document.getElementById('navBackdrop');
+    var nav = document.getElementById('mobileNav');
+
+    function openNav() {
+        nav.classList.add('open');
+        backdrop.classList.add('open');
+        toggle.setAttribute('aria-expanded', 'true');
+        document.body.style.overflow = 'hidden';
+    }
+    function closeNav() {
+        nav.classList.remove('open');
+        backdrop.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+    }
+
+    toggle.addEventListener('click', openNav);
+    close.addEventListener('click', closeNav);
+    backdrop.addEventListener('click', closeNav);
+})();
+</script>
+</body>
+</html>
