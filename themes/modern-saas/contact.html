@@ -396,7 +396,7 @@ section.tight { padding: 44px 24px; }
     .mobile-nav-backdrop.open { opacity: 1; pointer-events: auto; }
     .mobile-nav {
         display: flex; flex-direction: column;
-        position: fixed; inset-inline-end: 0; top: 0; bottom: 0;
+        position: fixed; left: 0; top: 0; bottom: 0;
         width: min(300px, 85vw);
         background: var(--bg);
         box-shadow: -8px 0 30px rgba(0,0,0,0.3);
@@ -406,7 +406,6 @@ section.tight { padding: 44px 24px; }
         overflow-y: auto;
         border-inline-start: 1px solid var(--border);
     }
-    [dir="rtl"] .mobile-nav { transform: translateX(100%); }
     .mobile-nav.open { transform: translateX(0); }
     .mobile-nav-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 15px 16px; border-bottom: 1px solid var(--border); flex-shrink: 0; }
     .mobile-nav-links { display: flex; flex-direction: column; gap: 2px; padding: 10px 12px 20px; }
