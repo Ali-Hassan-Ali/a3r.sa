@@ -527,7 +527,7 @@ section.tight { padding: 40px 24px; }
     .mobile-nav-backdrop.open { opacity: 1; pointer-events: auto; }
     .mobile-nav {
         display: flex; flex-direction: column;
-        position: fixed; inset-inline-end: 0; top: 0; bottom: 0;
+        position: fixed; left: 0; top: 0; bottom: 0;
         width: min(300px, 85vw);
         background: var(--md-surface-container-lowest);
         box-shadow: var(--md-el3);
@@ -536,7 +536,6 @@ section.tight { padding: 40px 24px; }
         transition: transform .25s ease;
         overflow-y: auto;
     }
-    [dir="rtl"] .mobile-nav { transform: translateX(100%); }
     .mobile-nav.open { transform: translateX(0); }
     .mobile-nav-head {
         display: flex; align-items: center; justify-content: space-between; gap: 12px;
