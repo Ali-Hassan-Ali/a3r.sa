@@ -19,6 +19,7 @@
   --muted: #8f8f8f;
   --accent: #33a0ab;   /* أثر logo teal, standing in for Vercel's blue as the system's one interactive accent */
   --focus-alt: #257b84; /* a darker shade of it, same role as Vercel's #005FCC on thin 1px input outlines */
+  --on-accent: #052a30; /* ink for text/icons on the accent fill — white on #33a0ab is only ~3.1:1, this is ~11:1 */
 
   /* Status dots (§2) — data signal only, 10px max, never a fill */
   --dot-green: #45a557;
@@ -127,19 +128,22 @@ h2.h3, .h3 { font-size: clamp(24px, 20px + 1.4vw, 32px); font-weight: 600; line-
 
 /* ---------- Buttons (§4) — ghost-first, color-only feedback ---------- */
 .btn {
-  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-  height: var(--h-md); padding-inline: 16px; border-radius: var(--radius);
-  font-size: 14px; font-weight: 400; line-height: 1; white-space: nowrap;
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  height: var(--h-sm); padding-inline: 12px; border-radius: var(--radius);
+  font-size: 13px; font-weight: 400; line-height: 1; white-space: nowrap;
   background: transparent; color: var(--text-2);
   transition: background-color .15s ease, color .15s ease, box-shadow .15s ease;
 }
 .btn:hover { background: var(--bg-recessed); color: var(--text); }
 .btn:focus-visible { outline: none; box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--accent); }
-.btn-lg { height: var(--h-lg); padding-inline: 20px; font-size: 16px; border-radius: var(--radius-marketing); }
-.btn-sm { height: var(--h-sm); padding-inline: 12px; font-size: 13px; }
-.btn-icon { width: var(--h-md); padding: 0; }
-.btn-primary { background: var(--text); color: var(--bg); font-weight: 500; }
-.btn-primary:hover { background: color-mix(in srgb, var(--text), var(--bg) 18%); color: var(--bg); }
+.btn .ic { width: 14px; height: 14px; }
+.btn-lg { height: var(--h-md); padding-inline: 16px; font-size: 14px; }
+.btn-lg .ic { width: 16px; height: 16px; }
+.btn-sm { height: 28px; padding-inline: 10px; font-size: 12px; }
+.btn-icon { width: var(--h-sm); padding: 0; }
+.btn-primary { background: var(--accent); color: var(--on-accent); font-weight: 500; }
+.btn-primary:hover { background: color-mix(in srgb, var(--accent), #000 12%); color: var(--on-accent); }
+.btn-primary:focus-visible { box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--text); }
 .btn-outline { box-shadow: var(--shadow-border); color: var(--text-2); }
 .btn-outline:hover { background: var(--bg-recessed); color: var(--text); }
 
@@ -164,9 +168,8 @@ h2.h3, .h3 { font-size: clamp(24px, 20px + 1.4vw, 32px); font-weight: 600; line-
 .card-foot { padding: 14px 24px; box-shadow: var(--hairline-t); font-size: 12px; color: var(--muted); }
 
 /* ---------- Input (§4) ---------- */
-.input, .select { display: block; width: 100%; height: var(--h-md); padding-inline: 16px; background: transparent; color: var(--text); box-shadow: var(--shadow-border); border-radius: var(--radius); font-size: 14px; }
-.input-sm, .select-sm { height: var(--h-sm); font-size: 13px; }
-.input-lg, .select-lg { height: var(--h-lg); font-size: 16px; }
+.input, .select { display: block; width: 100%; height: var(--h-sm); padding-inline: 12px; background: transparent; color: var(--text); box-shadow: var(--shadow-border); border-radius: var(--radius); font-size: 13px; }
+.input-lg, .select-lg { height: var(--h-md); padding-inline: 16px; font-size: 14px; }
 .input::placeholder { color: var(--muted); }
 .input:focus-visible, .select:focus-visible { outline: 1px solid var(--focus-alt); box-shadow: none; }
 .input-group { display: flex; gap: 8px; }
