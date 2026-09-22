@@ -203,4 +203,53 @@
       loginMsg.textContent = 'هذه نسخة عرض توضيحية، ولا تتصل بأي خادم فعلي.';
     });
   }
+
+  /* ---------- Count-up numbers (hero/KPI stats) ---------- */
+  var counters = $$('.count-up');
+  if (counters.length) {
+    var parseNum = function (text) {
+      var m = text.trim().match(/^(\D*)([\d.,]+)(\D*)$/);
+      if (!m) return null;
+      var digits = m[2].replace(/,/g, '');
+      return { prefix: m[1], value: parseFloat(digits), suffix: m[3], decimals: (digits.split('.')[1] || '').length };
+    };
+    var format = function (n, decimals) {
+      return decimals ? n.toFixed(decimals) : Math.round(n).toLocaleString('en-US');
+    };
+    var animateCount = function (el) {
+      var n = parseNum(el.textContent);
+      if (!n || !isFinite(n.value)) return;
+      var finalText = n.prefix + format(n.value, n.decimals) + n.suffix;
+      if (reduceMotion) { el.textContent = finalText; return; }
+      var dur = 1000, t0 = Date.now();
+      var timer = setInterval(function () {
+        var p = Math.min(1, (Date.now() - t0) / dur);
+        var eased = 1 - Math.pow(1 - p, 3);
+        el.textContent = n.prefix + format(n.value * eased, n.decimals) + n.suffix;
+        if (p >= 1) { clearInterval(timer); el.textContent = finalText; }
+      }, 16);
+    };
+    if ('IntersectionObserver' in window) {
+      var cio = new IntersectionObserver(function (entries, obs) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { animateCount(e.target); obs.unobserve(e.target); }
+        });
+      }, { threshold: 0.6 });
+      counters.forEach(function (el) { cio.observe(el); });
+    }
+  }
+
+  /* ---------- Scroll reveal: one-time fade + rise per card ---------- */
+  if (!reduceMotion && 'IntersectionObserver' in window) {
+    var cards = $$('.card');
+    if (cards.length) {
+      root.classList.add('js-reveal');
+      var rio = new IntersectionObserver(function (entries, obs) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add('is-visible'); obs.unobserve(e.target); }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -32px 0px' });
+      cards.forEach(function (el) { rio.observe(el); });
+    }
+  }
 })();

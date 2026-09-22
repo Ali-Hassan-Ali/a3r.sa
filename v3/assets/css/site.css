@@ -157,8 +157,25 @@ h2.h3, .h3 { font-size: clamp(24px, 20px + 1.4vw, 32px); font-weight: 600; line-
 .status { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; color: var(--text-2); }
 
 /* ---------- Card (§4, §6) ---------- */
-.card { background: var(--bg-elevated); box-shadow: var(--shadow-border); border-radius: var(--radius-lg); }
+.card {
+  background: var(--bg-elevated); box-shadow: var(--shadow-border); border-radius: var(--radius-lg);
+  transition: box-shadow .2s ease, opacity .5s ease, transform .5s ease;
+}
 .card-pad { padding: 24px; }
+
+/* Hover elevation — the doc's own "Medium" shadow tier (§6), for the
+   cards that read as one browsable unit; row/nav-style hovers stay
+   color-only per §4, never shadow. */
+.feature:hover, .stat-card:hover, .video-card:hover, .quotes:hover {
+  box-shadow: var(--shadow-border-md);
+}
+
+/* Scroll reveal: a one-time, subtle fade + rise per card. Gated behind a
+   class JS only adds when IntersectionObserver exists and the visitor
+   hasn't asked for reduced motion — CSS-disabled or JS-disabled visitors
+   simply see the cards already in place. */
+html.js-reveal .card { opacity: 0; transform: translateY(10px); }
+html.js-reveal .card.is-visible { opacity: 1; transform: translateY(0); }
 .card-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 16px 24px; box-shadow: var(--hairline-b); }
 .card-title { font-size: 14px; font-weight: 500; color: var(--text); }
 .card-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 24px; box-shadow: var(--hairline-b); }
