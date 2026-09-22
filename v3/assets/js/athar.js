@@ -110,6 +110,30 @@
       slides.forEach(function (s) { io.observe(s); });
     }
     sync();
+
+    /* Auto-advance every 6s; pauses on hover/focus/touch and while the
+       tab is hidden, and never runs at all under reduced-motion. */
+    if (!reduceMotion && slides.length > 1) {
+      var AUTO_MS = 6000;
+      var timer = null;
+      var start = function () {
+        stop();
+        timer = setInterval(function () { go(idx + 1); }, AUTO_MS);
+      };
+      var stop = function () {
+        if (timer) { clearInterval(timer); timer = null; }
+      };
+      ['mouseenter', 'focusin', 'touchstart'].forEach(function (ev) {
+        car.addEventListener(ev, stop, { passive: true });
+      });
+      ['mouseleave', 'focusout'].forEach(function (ev) {
+        car.addEventListener(ev, start);
+      });
+      doc.addEventListener('visibilitychange', function () {
+        if (doc.hidden) stop(); else start();
+      });
+      start();
+    }
   }
 
   /* ---------- Directory filter ---------- */

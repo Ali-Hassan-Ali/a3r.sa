@@ -17,8 +17,8 @@
   --text: #171717;
   --text-2: #4d4d4d;
   --muted: #8f8f8f;
-  --accent: #0072f5;
-  --focus-alt: #005fcc;
+  --accent: #33a0ab;   /* أثر logo teal, standing in for Vercel's blue as the system's one interactive accent */
+  --focus-alt: #257b84; /* a darker shade of it, same role as Vercel's #005FCC on thin 1px input outlines */
 
   /* Status dots (§2) — data signal only, 10px max, never a fill */
   --dot-green: #45a557;
@@ -189,7 +189,6 @@ h2.h3, .h3 { font-size: clamp(24px, 20px + 1.4vw, 32px); font-weight: 600; line-
 .header-row { display: flex; align-items: center; gap: 32px; height: var(--header-h); }
 .brand { display: flex; align-items: center; gap: 10px; flex: none; font-weight: 600; font-size: 16px; }
 .brand-mark { height: 22px; width: auto; }
-[data-theme="dark"] .brand-mark { filter: invert(1) brightness(1.6); }
 
 .nav { display: none; align-items: center; gap: 4px; }
 .nav a { display: inline-flex; align-items: center; height: 32px; padding-inline: 12px; border-radius: var(--radius); font-size: 14px; color: var(--text-2); transition: background-color .15s, color .15s; }
