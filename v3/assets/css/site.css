@@ -213,7 +213,8 @@ html.js-reveal .card.is-visible { opacity: 1; transform: translateY(0); }
 .nav { display: none; align-items: center; gap: 4px; }
 .nav a { display: inline-flex; align-items: center; height: 32px; padding-inline: 12px; border-radius: var(--radius); font-size: 14px; color: var(--text-2); transition: background-color .15s, color .15s; }
 .nav a:hover { background: var(--bg-recessed); color: var(--text); }
-.nav a[aria-current="page"] { color: var(--text); font-weight: 500; }
+.nav a[aria-current="page"] { color: var(--accent); font-weight: 500; background: var(--bg-recessed); }
+.nav a[aria-current="page"]:hover { color: var(--accent); }
 .header-actions { display: flex; align-items: center; gap: 8px; margin-inline-start: auto; }
 .nav-toggle .ic-x, .theme-toggle .ic-moon { display: none; }
 [data-theme="dark"] .theme-toggle .ic-sun { display: none; }
