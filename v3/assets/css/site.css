@@ -19,7 +19,7 @@
   --muted: #8f8f8f;
   --accent: #33a0ab;   /* أثر logo teal, standing in for Vercel's blue as the system's one interactive accent */
   --focus-alt: #257b84; /* a darker shade of it, same role as Vercel's #005FCC on thin 1px input outlines */
-  --on-accent: #052a30; /* ink for text/icons on the accent fill — white on #33a0ab is only ~3.1:1, this is ~11:1 */
+  --on-accent: #ffffff; /* text/icons on the accent fill — ~3.1:1 on #33a0ab, below AA for small text but the requested look */
 
   /* Status dots (§2) — data signal only, 10px max, never a fill */
   --dot-green: #45a557;
