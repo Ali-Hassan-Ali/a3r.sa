@@ -168,4 +168,15 @@
     });
     phone.addEventListener('input', function () { phone.removeAttribute('aria-invalid'); msg.textContent = ''; });
   }
+
+  /* ---------- Login form (static site — no backend to authenticate against) ---------- */
+  var login = $('[data-login]');
+  if (login) {
+    var loginMsg = $('[data-msg]', login);
+    login.addEventListener('submit', function (e) {
+      e.preventDefault();
+      loginMsg.style.color = 'var(--text-2)';
+      loginMsg.textContent = 'هذه نسخة عرض توضيحية، ولا تتصل بأي خادم فعلي.';
+    });
+  }
 })();
