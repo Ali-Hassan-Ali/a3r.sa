@@ -17,6 +17,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
 <symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"></path></symbol>
 <symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m22 6-10 7L2 6"></path></symbol>
+<symbol id="i-eye-off" viewBox="0 0 24 24"><path d="M10.6 10.6a2 2 0 0 0 2.8 2.8"></path><path d="M16.7 16.7A9 9 0 0 1 12 18c-6 0-10-6-10-6a17 17 0 0 1 4.3-4.7M9.9 5.2A9 9 0 0 1 12 5c6 0 10 6 10 6a17 17 0 0 1-2.2 2.8"></path><path d="M2 2l20 20"></path></symbol>
 <symbol id="i-lock" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></symbol>
 <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"></path></symbol>
 <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"></path></symbol>
@@ -61,6 +62,7 @@
       <a href="videos.html">مكتبة الفيديوهات</a>
       <a href="assess.html">قيّم جمعيتك</a>
       <a href="directory.html">دليل الجمعيات</a>
+      <a href="faq.html">أسئلة وإجابات</a>
     </nav>
     <div class="header-actions">
       <button class="btn btn-icon theme-toggle" type="button" data-theme-toggle aria-label="التبديل إلى الوضع الداكن" aria-pressed="false"><svg class="ic ic-sun" aria-hidden="true"><use href="#i-sun"></use></svg><svg class="ic ic-moon" aria-hidden="true"><use href="#i-moon"></use></svg></button>
@@ -78,6 +80,8 @@
         <a href="videos.html">مكتبة الفيديوهات<svg class="ic" aria-hidden="true"><use href="#i-chev-end"></use></svg></a>
         <a href="assess.html">قيّم جمعيتك<svg class="ic" aria-hidden="true"><use href="#i-chev-end"></use></svg></a>
         <a href="directory.html">دليل الجمعيات<svg class="ic" aria-hidden="true"><use href="#i-chev-end"></use></svg></a>
+        <a href="faq.html">أسئلة وإجابات<svg class="ic" aria-hidden="true"><use href="#i-chev-end"></use></svg></a>
+        <a href="contact.html">تواصل معنا<svg class="ic" aria-hidden="true"><use href="#i-chev-end"></use></svg></a>
       </nav>
       <div class="drawer-foot">
         <a href="tel:0554686962"><svg class="ic" aria-hidden="true"><use href="#i-phone"></use></svg><span dir="ltr">0554686962</span></a>
@@ -89,7 +93,7 @@
 
 <main id="main">
 
-<section class="auth-shell">
+<section class="auth-shell hatch">
   <div class="wrap" style="display:flex;justify-content:center">
     <form class="card auth-card" novalidate data-login>
       <div class="brand">
@@ -105,10 +109,10 @@
       </div>
       <div class="form-field">
         <label class="field-label" for="lg-pass">كلمة المرور</label>
-        <div class="field"><svg class="ic" aria-hidden="true"><use href="#i-lock"></use></svg><input class="input" id="lg-pass" type="password" autocomplete="current-password" placeholder="••••••••" required></div>
+        <div class="field"><svg class="ic" aria-hidden="true"><use href="#i-lock"></use></svg><input class="input has-action" id="lg-pass" type="password" autocomplete="current-password" placeholder="••••••••" required><button class="field-action" type="button" data-toggle-password="lg-pass" aria-label="إظهار كلمة المرور" aria-pressed="false"><svg class="ic ic-show" aria-hidden="true"><use href="#i-eye"></use></svg><svg class="ic ic-hide" aria-hidden="true"><use href="#i-eye-off"></use></svg></button></div>
       </div>
       <div class="form-foot">
-        <label style="display:inline-flex;align-items:center;gap:8px;color:var(--text-2)"><input type="checkbox" style="width:16px;height:16px">تذكّرني</label>
+        <label class="checkline"><input class="checkbox" type="checkbox">تذكّرني</label>
         <a href="#" style="color:var(--text-2)">نسيت كلمة المرور؟</a>
       </div>
 
@@ -118,7 +122,15 @@
       <div class="form-divider">أو</div>
       <a class="btn btn-outline" style="width:100%" href="https://a3r.test/register-hospital"><svg class="ic" aria-hidden="true"><use href="#i-landmark"></use></svg>تسجيل جمعية جديدة</a>
 
-      <p class="auth-note"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg> هذه نسخة عرض توضيحية لتصميم الواجهة فقط، ولا تُجري تسجيل دخول فعليًا. الدخول الحقيقي متاح عبر تطبيق أثر.</p>
+      <div class="demo-box">
+        <div class="demo-head"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg>بيانات الدخول التجريبية</div>
+        <dl class="demo-creds">
+          <dt>البريد</dt><dd class="mono" dir="ltr">demo@a3r.sa</dd>
+          <dt>كلمة المرور</dt><dd class="mono" dir="ltr">athar1234</dd>
+        </dl>
+        <button class="btn btn-outline" type="button" data-fill-demo style="width:100%">تعبئة البيانات تلقائيًا</button>
+      </div>
+      <p class="auth-note"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg> التحقق يتم في المتصفح فقط لأغراض العرض — ليس نظام حماية حقيقيًا. الدخول الفعلي عبر تطبيق أثر.</p>
       <p class="auth-foot"><a href="index.html">← العودة إلى الرئيسية</a></p>
     </form>
   </div>
@@ -138,8 +150,8 @@
       <div class="footer-col">
         <h4>روابط تهمك</h4>
         <ul>
-          <li><a href="#">أثر برو</a></li>
-          <li><a href="#">المنصة الوطنية للعمل التطوعي</a></li>
+          <li><a href="https://a3rpro.com/" target="_blank" rel="noopener">أثر برو</a></li>
+          <li><a href="https://nvg.gov.sa" target="_blank" rel="noopener">المنصة الوطنية للعمل التطوعي</a></li>
           <li><a href="https://www.hrsd.gov.sa" target="_blank" rel="noopener">وزارة الموارد البشرية والتنمية الاجتماعية</a></li>
           <li><a href="https://ncnp.gov.sa/ar" target="_blank" rel="noopener">المركز الوطني لتنمية القطاع غير الربحي</a></li>
         </ul>
@@ -158,12 +170,14 @@
         <ul>
           <li><a href="mailto:alzobidy.aa@gmail.com"><svg class="ic" aria-hidden="true"><use href="#i-mail"></use></svg>alzobidy.aa@gmail.com</a></li>
           <li><a href="tel:0554686962"><svg class="ic" aria-hidden="true"><use href="#i-phone"></use></svg><span dir="ltr">0554686962</span></a></li>
+          <li><a href="contact.html">صفحة التواصل</a></li>
+          <li><a href="faq.html">أسئلة وإجابات</a></li>
         </ul>
         <div class="social">
-          <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="إنستغرام"><svg class="ic" aria-hidden="true"><use href="#i-instagram"></use></svg></a>
-          <a href="https://x.com" target="_blank" rel="noopener" aria-label="إكس"><svg class="ic ic-fill" aria-hidden="true"><use href="#i-x-social"></use></svg></a>
-          <a href="https://youtube.com" target="_blank" rel="noopener" aria-label="يوتيوب"><svg class="ic ic-fill" aria-hidden="true"><use href="#i-youtube"></use></svg></a>
-          <a href="https://wa.me/966554686962" target="_blank" rel="noopener" aria-label="واتساب"><svg class="ic" aria-hidden="true"><use href="#i-whatsapp"></use></svg></a>
+          <a href="https://www.instagram.com/alzobidy_aa" target="_blank" rel="noopener" aria-label="إنستغرام"><svg class="ic" aria-hidden="true"><use href="#i-instagram"></use></svg></a>
+          <a href="https://twitter.com/AAlzobidy" target="_blank" rel="noopener" aria-label="إكس"><svg class="ic ic-fill" aria-hidden="true"><use href="#i-x-social"></use></svg></a>
+          <a href="https://www.youtube.com/@aalzobidy" target="_blank" rel="noopener" aria-label="يوتيوب"><svg class="ic ic-fill" aria-hidden="true"><use href="#i-youtube"></use></svg></a>
+          <a href="https://whatsapp.com/channel/0029VaD6pVrGzzKVCYyr843M" target="_blank" rel="noopener" aria-label="قناة واتساب"><svg class="ic" aria-hidden="true"><use href="#i-whatsapp"></use></svg></a>
         </div>
       </div>
     </div>

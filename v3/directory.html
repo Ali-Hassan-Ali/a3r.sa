@@ -88,7 +88,7 @@
 </header>
 
 <main id="main">
-<section class="page-head">
+<section class="page-head hatch">
   <div class="wrap">
     <ul class="crumbs"><li><a href="index.html">الرئيسية</a></li><li>دليل الجمعيات</li></ul>
     <h1 class="h1">دليل الجمعيات الأهلية</h1>
@@ -100,11 +100,17 @@
   <div class="wrap">
     <div class="grid-3">
       <div class="card stat-card"><b class="count-up">13</b><span>جمعية مسجّلة</span></div>
-      <div class="card stat-card"><b class="count-up">13</b><span>منطقة إدارية</span></div>
+      <div class="card stat-card"><b class="count-up">7</b><span>منطقة ممثَّلة في الدليل</span></div>
       <div class="card stat-card"><b class="count-up">5</b><span>جمعية بمكة المكرمة</span></div>
     </div>
 
     <div class="card" style="margin-top:16px">
+      <div class="segmented" role="group" aria-label="تصفية سريعة حسب المنطقة">
+        <button type="button" data-region-pill="" aria-pressed="true">الكل</button>
+        <button type="button" data-region-pill="مكة المكرمة" aria-pressed="false">مكة المكرمة</button>
+        <button type="button" data-region-pill="الرياض" aria-pressed="false">الرياض</button>
+        <button type="button" data-region-pill="الشرقية" aria-pressed="false">الشرقية</button>
+      </div>
       <div class="filters">
         <div class="field"><svg class="ic" aria-hidden="true"><use href="#i-search"></use></svg><input class="input" data-q type="search" placeholder="ابحث باسم الجمعية أو رقم الترخيص..." aria-label="ابحث باسم الجمعية أو رقم الترخيص"></div>
         <div class="field field-select">
@@ -129,21 +135,21 @@
       </div>
       <div class="table-wrap">
         <table class="table">
-          <thead><tr><th scope="col" style="width:48px">م</th><th scope="col">المنطقة</th><th scope="col">اسم الجمعية</th><th scope="col">الترخيص</th><th scope="col">الحي</th><th scope="col">العنوان</th><th scope="col">الموقع</th><th scope="col">وسيلة التواصل</th></tr></thead>
+          <thead><tr><th scope="col" style="width:48px">م</th><th scope="col">المنطقة</th><th scope="col">اسم الجمعية</th><th scope="col">الترخيص</th><th scope="col">الحي</th><th scope="col">العنوان</th><th scope="col">وسيلة التواصل</th></tr></thead>
           <tbody>
-          <tr data-region="مكة المكرمة"><td class="rn mono" data-label="م">1</td><td data-label="المنطقة">مكة المكرمة</td><td data-label="اسم الجمعية" style="font-weight:500">جمعية أم القرى الخيرية النسائية</td><td data-label="الترخيص"><span class="lic">20</span></td><td data-label="الحي">النزهة</td><td data-label="العنوان">شارع الملك عبدالعزيز، حي النزهة</td><td data-label="الموقع"><span class="muted">—</span></td><td data-label="التواصل"><a href="tel:0554882449" class="mono" dir="ltr">0554882449</a></td></tr>
-          <tr data-region="مكة المكرمة"><td class="rn mono" data-label="م">2</td><td data-label="المنطقة">مكة المكرمة</td><td data-label="اسم الجمعية" style="font-weight:500">جمعية البر بمكة المكرمة</td><td data-label="الترخيص"><span class="lic">57</span></td><td data-label="الحي">التقوى</td><td data-label="العنوان">طريق الحرم، حي التقوى</td><td data-label="الموقع"><span class="muted">—</span></td><td data-label="التواصل"><a href="tel:0125365000" class="mono" dir="ltr">0125365000</a></td></tr>
-          <tr data-region="مكة المكرمة"><td class="rn mono" data-label="م">3</td><td data-label="المنطقة">مكة المكرمة</td><td data-label="اسم الجمعية" style="font-weight:500">جمعية إكرام لحفظ الطعام</td><td data-label="الترخيص"><span class="lic">1024</span></td><td data-label="الحي">جبل النور</td><td data-label="العنوان">طريق جبل النور، حي جبل النور</td><td data-label="الموقع"><span class="muted">—</span></td><td data-label="التواصل"><a href="tel:0126677431" class="mono" dir="ltr">0126677431</a></td></tr>
-          <tr data-region="مكة المكرمة"><td class="rn mono" data-label="م">4</td><td data-label="المنطقة">مكة المكرمة</td><td data-label="اسم الجمعية" style="font-weight:500">جمعية تحفيظ القرآن الكريم</td><td data-label="الترخيص"><span class="lic">143</span></td><td data-label="الحي">العزيزية</td><td data-label="العنوان">شارع الستين، حي العزيزية</td><td data-label="الموقع"><span class="muted">—</span></td><td data-label="التواصل"><a href="tel:0125548822" class="mono" dir="ltr">0125548822</a></td></tr>
-          <tr data-region="مكة المكرمة"><td class="rn mono" data-label="م">5</td><td data-label="المنطقة">مكة المكرمة</td><td data-label="اسم الجمعية" style="font-weight:500">جمعية رعاية الأيتام «إخاء»</td><td data-label="الترخيص"><span class="lic">318</span></td><td data-label="الحي">الشوقية</td><td data-label="العنوان">طريق المدينة، حي الشوقية</td><td data-label="الموقع"><span class="muted">—</span></td><td data-label="التواصل"><a href="tel:0126201144" class="mono" dir="ltr">0126201144</a></td></tr>
-          <tr data-region="الرياض"><td class="rn mono" data-label="م">6</td><td data-label="المنطقة">الرياض</td><td data-label="اسم الجمعية" style="font-weight:500">جمعية بناء للتنمية الاجتماعية</td><td data-label="الترخيص"><span class="lic">762</span></td><td data-label="الحي">الملز</td><td data-label="العنوان">شارع الأمير عبدالله، حي الملز</td><td data-label="الموقع"><span class="muted">—</span></td><td data-label="التواصل"><a href="tel:0114772200" class="mono" dir="ltr">0114772200</a></td></tr>
-          <tr data-region="الرياض"><td class="rn mono" data-label="م">7</td><td data-label="المنطقة">الرياض</td><td data-label="اسم الجمعية" style="font-weight:500">جمعية الرياض الخيرية لكبار السن</td><td data-label="الترخيص"><span class="lic">891</span></td><td data-label="الحي">الروضة</td><td data-label="العنوان">طريق الملك فهد، حي الروضة</td><td data-label="الموقع"><span class="muted">—</span></td><td data-label="التواصل"><a href="tel:0114455600" class="mono" dir="ltr">0114455600</a></td></tr>
-          <tr data-region="الشرقية"><td class="rn mono" data-label="م">8</td><td data-label="المنطقة">الشرقية</td><td data-label="اسم الجمعية" style="font-weight:500">جمعية رواء لرعاية الأيتام</td><td data-label="الترخيص"><span class="lic">941</span></td><td data-label="الحي">الفيصلية</td><td data-label="العنوان">طريق الملك فهد، حي الفيصلية</td><td data-label="الموقع"><span class="muted">—</span></td><td data-label="التواصل"><a href="tel:0138901255" class="mono" dir="ltr">0138901255</a></td></tr>
-          <tr data-region="الشرقية"><td class="rn mono" data-label="م">9</td><td data-label="المنطقة">الشرقية</td><td data-label="اسم الجمعية" style="font-weight:500">جمعية الأحساء الخيرية للتنمية الأسرية</td><td data-label="الترخيص"><span class="lic">1103</span></td><td data-label="الحي">الكوت</td><td data-label="العنوان">شارع الملك سعود، حي الكوت</td><td data-label="الموقع"><span class="muted">—</span></td><td data-label="التواصل"><a href="tel:0135872200" class="mono" dir="ltr">0135872200</a></td></tr>
-          <tr data-region="المدينة المنورة"><td class="rn mono" data-label="م">10</td><td data-label="المنطقة">المدينة المنورة</td><td data-label="اسم الجمعية" style="font-weight:500">جمعية أهل المدينة الخيرية</td><td data-label="الترخيص"><span class="lic">455</span></td><td data-label="الحي">قربان</td><td data-label="العنوان">طريق الملك عبدالله، حي قربان</td><td data-label="الموقع"><span class="muted">—</span></td><td data-label="التواصل"><a href="tel:0148228833" class="mono" dir="ltr">0148228833</a></td></tr>
-          <tr data-region="القصيم"><td class="rn mono" data-label="م">11</td><td data-label="المنطقة">القصيم</td><td data-label="اسم الجمعية" style="font-weight:500">جمعية القصيم لرعاية الأسرة</td><td data-label="الترخيص"><span class="lic">677</span></td><td data-label="الحي">الصفراء</td><td data-label="العنوان">طريق الملك فهد، حي الصفراء</td><td data-label="الموقع"><span class="muted">—</span></td><td data-label="التواصل"><a href="tel:0163251144" class="mono" dir="ltr">0163251144</a></td></tr>
-          <tr data-region="عسير"><td class="rn mono" data-label="م">12</td><td data-label="المنطقة">عسير</td><td data-label="اسم الجمعية" style="font-weight:500">جمعية عسير للتنمية الاجتماعية</td><td data-label="الترخيص"><span class="lic">389</span></td><td data-label="الحي">المنسك</td><td data-label="العنوان">شارع الملك خالد، حي المنسك</td><td data-label="الموقع"><span class="muted">—</span></td><td data-label="التواصل"><a href="tel:0172245566" class="mono" dir="ltr">0172245566</a></td></tr>
-          <tr data-region="تبوك"><td class="rn mono" data-label="م">13</td><td data-label="المنطقة">تبوك</td><td data-label="اسم الجمعية" style="font-weight:500">جمعية تبوك الخيرية النسائية</td><td data-label="الترخيص"><span class="lic">512</span></td><td data-label="الحي">السلام</td><td data-label="العنوان">طريق الأمير فهد، حي السلام</td><td data-label="الموقع"><span class="muted">—</span></td><td data-label="التواصل"><a href="tel:0144229977" class="mono" dir="ltr">0144229977</a></td></tr>
+          <tr data-region="مكة المكرمة"><td class="rn mono" data-label="م">1</td><td data-label="المنطقة">مكة المكرمة</td><td data-label="اسم الجمعية" style="font-weight:500">جمعية أم القرى الخيرية النسائية</td><td data-label="الترخيص"><span class="lic">20</span></td><td data-label="الحي">النزهة</td><td data-label="العنوان">شارع الملك عبدالعزيز، حي النزهة</td><td data-label="التواصل"><a href="tel:0554882449" class="mono" dir="ltr">0554882449</a></td></tr>
+          <tr data-region="مكة المكرمة"><td class="rn mono" data-label="م">2</td><td data-label="المنطقة">مكة المكرمة</td><td data-label="اسم الجمعية" style="font-weight:500">جمعية البر بمكة المكرمة</td><td data-label="الترخيص"><span class="lic">57</span></td><td data-label="الحي">التقوى</td><td data-label="العنوان">طريق الحرم، حي التقوى</td><td data-label="التواصل"><a href="tel:0125365000" class="mono" dir="ltr">0125365000</a></td></tr>
+          <tr data-region="مكة المكرمة"><td class="rn mono" data-label="م">3</td><td data-label="المنطقة">مكة المكرمة</td><td data-label="اسم الجمعية" style="font-weight:500">جمعية إكرام لحفظ الطعام</td><td data-label="الترخيص"><span class="lic">1024</span></td><td data-label="الحي">جبل النور</td><td data-label="العنوان">طريق جبل النور، حي جبل النور</td><td data-label="التواصل"><a href="tel:0126677431" class="mono" dir="ltr">0126677431</a></td></tr>
+          <tr data-region="مكة المكرمة"><td class="rn mono" data-label="م">4</td><td data-label="المنطقة">مكة المكرمة</td><td data-label="اسم الجمعية" style="font-weight:500">جمعية تحفيظ القرآن الكريم</td><td data-label="الترخيص"><span class="lic">143</span></td><td data-label="الحي">العزيزية</td><td data-label="العنوان">شارع الستين، حي العزيزية</td><td data-label="التواصل"><a href="tel:0125548822" class="mono" dir="ltr">0125548822</a></td></tr>
+          <tr data-region="مكة المكرمة"><td class="rn mono" data-label="م">5</td><td data-label="المنطقة">مكة المكرمة</td><td data-label="اسم الجمعية" style="font-weight:500">جمعية رعاية الأيتام «إخاء»</td><td data-label="الترخيص"><span class="lic">318</span></td><td data-label="الحي">الشوقية</td><td data-label="العنوان">طريق المدينة، حي الشوقية</td><td data-label="التواصل"><a href="tel:0126201144" class="mono" dir="ltr">0126201144</a></td></tr>
+          <tr data-region="الرياض"><td class="rn mono" data-label="م">6</td><td data-label="المنطقة">الرياض</td><td data-label="اسم الجمعية" style="font-weight:500">جمعية بناء للتنمية الاجتماعية</td><td data-label="الترخيص"><span class="lic">762</span></td><td data-label="الحي">الملز</td><td data-label="العنوان">شارع الأمير عبدالله، حي الملز</td><td data-label="التواصل"><a href="tel:0114772200" class="mono" dir="ltr">0114772200</a></td></tr>
+          <tr data-region="الرياض"><td class="rn mono" data-label="م">7</td><td data-label="المنطقة">الرياض</td><td data-label="اسم الجمعية" style="font-weight:500">جمعية الرياض الخيرية لكبار السن</td><td data-label="الترخيص"><span class="lic">891</span></td><td data-label="الحي">الروضة</td><td data-label="العنوان">طريق الملك فهد، حي الروضة</td><td data-label="التواصل"><a href="tel:0114455600" class="mono" dir="ltr">0114455600</a></td></tr>
+          <tr data-region="الشرقية"><td class="rn mono" data-label="م">8</td><td data-label="المنطقة">الشرقية</td><td data-label="اسم الجمعية" style="font-weight:500">جمعية رواء لرعاية الأيتام</td><td data-label="الترخيص"><span class="lic">941</span></td><td data-label="الحي">الفيصلية</td><td data-label="العنوان">طريق الملك فهد، حي الفيصلية</td><td data-label="التواصل"><a href="tel:0138901255" class="mono" dir="ltr">0138901255</a></td></tr>
+          <tr data-region="الشرقية"><td class="rn mono" data-label="م">9</td><td data-label="المنطقة">الشرقية</td><td data-label="اسم الجمعية" style="font-weight:500">جمعية الأحساء الخيرية للتنمية الأسرية</td><td data-label="الترخيص"><span class="lic">1103</span></td><td data-label="الحي">الكوت</td><td data-label="العنوان">شارع الملك سعود، حي الكوت</td><td data-label="التواصل"><a href="tel:0135872200" class="mono" dir="ltr">0135872200</a></td></tr>
+          <tr data-region="المدينة المنورة"><td class="rn mono" data-label="م">10</td><td data-label="المنطقة">المدينة المنورة</td><td data-label="اسم الجمعية" style="font-weight:500">جمعية أهل المدينة الخيرية</td><td data-label="الترخيص"><span class="lic">455</span></td><td data-label="الحي">قربان</td><td data-label="العنوان">طريق الملك عبدالله، حي قربان</td><td data-label="التواصل"><a href="tel:0148228833" class="mono" dir="ltr">0148228833</a></td></tr>
+          <tr data-region="القصيم"><td class="rn mono" data-label="م">11</td><td data-label="المنطقة">القصيم</td><td data-label="اسم الجمعية" style="font-weight:500">جمعية القصيم لرعاية الأسرة</td><td data-label="الترخيص"><span class="lic">677</span></td><td data-label="الحي">الصفراء</td><td data-label="العنوان">طريق الملك فهد، حي الصفراء</td><td data-label="التواصل"><a href="tel:0163251144" class="mono" dir="ltr">0163251144</a></td></tr>
+          <tr data-region="عسير"><td class="rn mono" data-label="م">12</td><td data-label="المنطقة">عسير</td><td data-label="اسم الجمعية" style="font-weight:500">جمعية عسير للتنمية الاجتماعية</td><td data-label="الترخيص"><span class="lic">389</span></td><td data-label="الحي">المنسك</td><td data-label="العنوان">شارع الملك خالد، حي المنسك</td><td data-label="التواصل"><a href="tel:0172245566" class="mono" dir="ltr">0172245566</a></td></tr>
+          <tr data-region="تبوك"><td class="rn mono" data-label="م">13</td><td data-label="المنطقة">تبوك</td><td data-label="اسم الجمعية" style="font-weight:500">جمعية تبوك الخيرية النسائية</td><td data-label="الترخيص"><span class="lic">512</span></td><td data-label="الحي">السلام</td><td data-label="العنوان">طريق الأمير فهد، حي السلام</td><td data-label="التواصل"><a href="tel:0144229977" class="mono" dir="ltr">0144229977</a></td></tr>
           </tbody>
         </table>
       </div>
@@ -166,8 +172,8 @@
       <div class="footer-col">
         <h4>روابط تهمك</h4>
         <ul>
-          <li><a href="#">أثر برو</a></li>
-          <li><a href="#">المنصة الوطنية للعمل التطوعي</a></li>
+          <li><a href="https://a3rpro.com/" target="_blank" rel="noopener">أثر برو</a></li>
+          <li><a href="https://nvg.gov.sa" target="_blank" rel="noopener">المنصة الوطنية للعمل التطوعي</a></li>
           <li><a href="https://www.hrsd.gov.sa" target="_blank" rel="noopener">وزارة الموارد البشرية والتنمية الاجتماعية</a></li>
           <li><a href="https://ncnp.gov.sa/ar" target="_blank" rel="noopener">المركز الوطني لتنمية القطاع غير الربحي</a></li>
         </ul>
@@ -186,12 +192,14 @@
         <ul>
           <li><a href="mailto:alzobidy.aa@gmail.com"><svg class="ic" aria-hidden="true"><use href="#i-mail"></use></svg>alzobidy.aa@gmail.com</a></li>
           <li><a href="tel:0554686962"><svg class="ic" aria-hidden="true"><use href="#i-phone"></use></svg><span dir="ltr">0554686962</span></a></li>
+          <li><a href="contact.html">صفحة التواصل</a></li>
+          <li><a href="faq.html">أسئلة وإجابات</a></li>
         </ul>
         <div class="social">
-          <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="إنستغرام"><svg class="ic" aria-hidden="true"><use href="#i-instagram"></use></svg></a>
-          <a href="https://x.com" target="_blank" rel="noopener" aria-label="إكس"><svg class="ic ic-fill" aria-hidden="true"><use href="#i-x-social"></use></svg></a>
-          <a href="https://youtube.com" target="_blank" rel="noopener" aria-label="يوتيوب"><svg class="ic ic-fill" aria-hidden="true"><use href="#i-youtube"></use></svg></a>
-          <a href="https://wa.me/966554686962" target="_blank" rel="noopener" aria-label="واتساب"><svg class="ic" aria-hidden="true"><use href="#i-whatsapp"></use></svg></a>
+          <a href="https://www.instagram.com/alzobidy_aa" target="_blank" rel="noopener" aria-label="إنستغرام"><svg class="ic" aria-hidden="true"><use href="#i-instagram"></use></svg></a>
+          <a href="https://twitter.com/AAlzobidy" target="_blank" rel="noopener" aria-label="إكس"><svg class="ic ic-fill" aria-hidden="true"><use href="#i-x-social"></use></svg></a>
+          <a href="https://www.youtube.com/@aalzobidy" target="_blank" rel="noopener" aria-label="يوتيوب"><svg class="ic ic-fill" aria-hidden="true"><use href="#i-youtube"></use></svg></a>
+          <a href="https://whatsapp.com/channel/0029VaD6pVrGzzKVCYyr843M" target="_blank" rel="noopener" aria-label="قناة واتساب"><svg class="ic" aria-hidden="true"><use href="#i-whatsapp"></use></svg></a>
         </div>
       </div>
     </div>

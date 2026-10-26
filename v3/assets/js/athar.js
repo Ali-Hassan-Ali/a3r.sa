@@ -123,15 +123,27 @@
       var stop = function () {
         if (timer) { clearInterval(timer); timer = null; }
       };
+      // An explicit pause control, not just hover/focus (WCAG 2.2.2).
+      var paused = false;
+      var pauseBtn = $('[data-pause]', car);
+      var resume = function () { if (!paused) start(); };
       ['mouseenter', 'focusin', 'touchstart'].forEach(function (ev) {
         car.addEventListener(ev, stop, { passive: true });
       });
       ['mouseleave', 'focusout'].forEach(function (ev) {
-        car.addEventListener(ev, start);
+        car.addEventListener(ev, resume);
       });
       doc.addEventListener('visibilitychange', function () {
-        if (doc.hidden) stop(); else start();
+        if (doc.hidden) stop(); else resume();
       });
+      if (pauseBtn) {
+        pauseBtn.addEventListener('click', function () {
+          paused = !paused;
+          pauseBtn.setAttribute('aria-pressed', paused ? 'true' : 'false');
+          pauseBtn.setAttribute('aria-label', paused ? 'تشغيل التبديل التلقائي' : 'إيقاف التبديل التلقائي');
+          if (paused) stop(); else start();
+        });
+      }
       start();
     }
   }
@@ -165,8 +177,22 @@
       count.textContent = shown;
       empty.hidden = shown > 0;
     };
+    var pills = $$('[data-region-pill]', dir);
+    var syncPills = function () {
+      pills.forEach(function (b) {
+        b.setAttribute('aria-pressed', b.getAttribute('data-region-pill') === region.value ? 'true' : 'false');
+      });
+    };
+    pills.forEach(function (b) {
+      b.addEventListener('click', function () {
+        region.value = b.getAttribute('data-region-pill');
+        syncPills();
+        run();
+      });
+    });
+
     q.addEventListener('input', run);
-    region.addEventListener('change', run);
+    region.addEventListener('change', function () { syncPills(); run(); });
   }
 
   /* ---------- Newsletter → WhatsApp (no backend on a static site) ---------- */
@@ -193,16 +219,220 @@
     phone.addEventListener('input', function () { phone.removeAttribute('aria-invalid'); msg.textContent = ''; });
   }
 
-  /* ---------- Login form (static site — no backend to authenticate against) ---------- */
+  /* ---------- Forms library: filter by department ---------- */
+  var formsPage = $('[data-forms]');
+  if (formsPage) {
+    var catBtns = $$('[data-cat]', formsPage);
+    var docs = $$('[data-doc-cat]', formsPage);
+    var docCount = $('[data-doc-count]', formsPage);
+    var docEmpty = $('[data-doc-empty]', formsPage);
+    catBtns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var cat = btn.getAttribute('data-cat');
+        catBtns.forEach(function (b) { b.setAttribute('aria-pressed', b === btn ? 'true' : 'false'); });
+        var shown = 0;
+        docs.forEach(function (d) {
+          var ok = !cat || d.getAttribute('data-doc-cat') === cat;
+          d.hidden = !ok;
+          if (ok) shown += 1;
+        });
+        docCount.textContent = shown;
+        docEmpty.hidden = shown > 0;
+      });
+    });
+  }
+
+  /* ---------- Self-assessment: pick an answer ---------- */
+  var assess = $('[data-assess]');
+  if (assess) {
+    var choices = $$('.choice', assess);
+    choices.forEach(function (c) {
+      c.addEventListener('click', function () {
+        choices.forEach(function (o) { o.setAttribute('aria-checked', o === c ? 'true' : 'false'); });
+      });
+    });
+    var restart = $('[data-restart]', assess);
+    if (restart) {
+      restart.addEventListener('click', function () {
+        choices.forEach(function (o) { o.setAttribute('aria-checked', 'false'); });
+        var quiz = $('[data-quiz]', assess);
+        if (quiz) quiz.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'center' });
+      });
+    }
+  }
+
+  /* ---------- FAQ accordion (grid-rows + 3D-unfold reveal, in CSS) ---------- */
+  var setFaqOpen = function (btn, open) {
+    var item = btn.closest('.faq-item');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    if (item) item.classList.toggle('is-open', open);
+  };
+  $$('.faq-q').forEach(function (btn) {
+    var panel = doc.getElementById(btn.getAttribute('aria-controls'));
+    if (!panel) return;
+    btn.addEventListener('click', function () {
+      var open = btn.getAttribute('aria-expanded') === 'true';
+      // one open answer per group keeps the list scannable
+      var group = btn.closest('.faq-list');
+      if (group) {
+        $$('.faq-q[aria-expanded="true"]', group).forEach(function (other) {
+          if (other !== btn) setFaqOpen(other, false);
+        });
+      }
+      setFaqOpen(btn, !open);
+    });
+  });
+
+  /* ---------- Demo login ----------
+     No backend on a static host, so this checks one published demo account
+     client-side and remembers it in sessionStorage. It is a UI demo, not
+     security — never treat it as an access control. */
+  var DEMO = { email: 'demo@a3r.sa', pass: 'athar1234' };
+  var SESSION_KEY = 'athar-demo-session';
+
   var login = $('[data-login]');
   if (login) {
     var loginMsg = $('[data-msg]', login);
     login.addEventListener('submit', function (e) {
       e.preventDefault();
-      loginMsg.style.color = 'var(--text-2)';
-      loginMsg.textContent = 'هذه نسخة عرض توضيحية، ولا تتصل بأي خادم فعلي.';
+      var email = ($('#lg-email', login).value || '').trim().toLowerCase();
+      var pass = $('#lg-pass', login).value || '';
+      if (email === DEMO.email && pass === DEMO.pass) {
+        try { sessionStorage.setItem(SESSION_KEY, '1'); } catch (err) { /* private mode */ }
+        loginMsg.style.color = 'var(--dot-green)';
+        loginMsg.textContent = 'تم تسجيل الدخول — جارٍ التحويل...';
+        setTimeout(function () { location.href = 'dashboard.html'; }, 500);
+      } else {
+        loginMsg.style.color = 'var(--dot-red)';
+        loginMsg.textContent = 'البيانات غير صحيحة. استخدم بيانات العرض الموضّحة أسفل النموذج.';
+      }
+    });
+
+    // one-click fill, so nobody has to retype the demo account
+    var fill = $('[data-fill-demo]', login);
+    if (fill) {
+      fill.addEventListener('click', function () {
+        $('#lg-email', login).value = DEMO.email;
+        $('#lg-pass', login).value = DEMO.pass;
+        loginMsg.textContent = '';
+      });
+    }
+  }
+
+  var logout = $('[data-logout]');
+  if (logout) {
+    logout.addEventListener('click', function () {
+      try { sessionStorage.removeItem(SESSION_KEY); } catch (err) { /* ignore */ }
     });
   }
+
+  /* ---------- Contact form -> WhatsApp (same honest fallback as the newsletter) ---------- */
+  var contact = $('[data-contact]');
+  if (contact) {
+    var cMsg = $('[data-msg]', contact);
+    contact.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var get = function (id) { return ($('#' + id, contact).value || '').trim(); };
+      var name = get('c-name'), phone = get('c-phone'), email = get('c-email'), body = get('c-msg');
+      if (!name || !body) {
+        cMsg.style.color = 'var(--dot-red)';
+        cMsg.textContent = 'الاسم والرسالة مطلوبان.';
+        return;
+      }
+      cMsg.textContent = '';
+      var text = 'رسالة من موقع أثر\nالاسم: ' + name +
+                 (phone ? '\nالجوال: ' + phone : '') +
+                 (email ? '\nالبريد: ' + email : '') +
+                 '\n\n' + body;
+      window.open('https://wa.me/966554686962?text=' + encodeURIComponent(text), '_blank', 'noopener');
+    });
+  }
+
+  /* ---------- Video lightbox ----------
+     Each trigger carries data-video: a YouTube id (or full watch/youtu.be URL),
+     or a path ending in .mp4/.webm for a local file. Nothing is requested from
+     YouTube until the visitor actually clicks. */
+  var lbTriggers = $$('[data-video]');
+  if (lbTriggers.length) {
+    var lb = null, lastFocus = null;
+
+    var youtubeId = function (v) {
+      var m = v.match(/(?:v=|youtu\.be\/|embed\/)([A-Za-z0-9_-]{11})/);
+      if (m) return m[1];
+      return /^[A-Za-z0-9_-]{11}$/.test(v) ? v : null;
+    };
+
+    var closeLb = function () {
+      if (!lb) return;
+      lb.hidden = true;
+      $('.lightbox-frame', lb).innerHTML = '';   // stops playback
+      doc.body.style.overflow = '';
+      if (lastFocus) lastFocus.focus();
+    };
+
+    var buildLb = function () {
+      lb = doc.createElement('div');
+      lb.className = 'lightbox';
+      lb.hidden = true;
+      lb.setAttribute('role', 'dialog');
+      lb.setAttribute('aria-modal', 'true');
+      lb.innerHTML =
+        '<div class="lightbox-panel">' +
+          '<button class="lightbox-close" type="button">إغلاق ✕</button>' +
+          '<div class="lightbox-frame"></div>' +
+          '<div class="lightbox-title"></div>' +
+        '</div>';
+      doc.body.appendChild(lb);
+      $('.lightbox-close', lb).addEventListener('click', closeLb);
+      lb.addEventListener('click', function (e) { if (e.target === lb) closeLb(); });
+      doc.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && !lb.hidden) closeLb();
+      });
+    };
+
+    var openLb = function (src, title, trigger) {
+      if (!lb) buildLb();
+      var frame = $('.lightbox-frame', lb);
+      var id = youtubeId(src);
+      if (id) {
+        frame.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + id +
+          '?autoplay=1&rel=0" title="' + (title || '') +
+          '" allow="accelerometer; autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
+      } else {
+        frame.innerHTML = '<video src="' + src + '" controls autoplay playsinline></video>';
+      }
+      $('.lightbox-title', lb).textContent = title || '';
+      lb.setAttribute('aria-label', title || 'مشغّل الفيديو');
+      lastFocus = trigger;
+      lb.hidden = false;
+      doc.body.style.overflow = 'hidden';
+      $('.lightbox-close', lb).focus();
+    };
+
+    lbTriggers.forEach(function (el) {
+      var src = el.getAttribute('data-video');
+      if (!src) return;                       // no id yet -> stays a "قريبًا" card
+      el.removeAttribute('disabled');
+      var card = el.closest('.video-card');
+      var soon = card && $('.soon', card);
+      if (soon) soon.remove();
+      var title = card ? (($('h3', card) || {}).textContent || '').trim() : '';
+      el.addEventListener('click', function () { openLb(src, title, el); });
+    });
+  }
+
+  /* ---------- Show/hide password ---------- */
+  $$('[data-toggle-password]').forEach(function (btn) {
+    var input = doc.getElementById(btn.getAttribute('data-toggle-password'));
+    if (!input) return;
+    btn.addEventListener('click', function () {
+      var show = input.type === 'password';
+      input.type = show ? 'text' : 'password';
+      btn.setAttribute('aria-pressed', show ? 'true' : 'false');
+      btn.setAttribute('aria-label', show ? 'إخفاء كلمة المرور' : 'إظهار كلمة المرور');
+      input.focus();
+    });
+  });
 
   /* ---------- Count-up numbers (hero/KPI stats) ---------- */
   var counters = $$('.count-up');
